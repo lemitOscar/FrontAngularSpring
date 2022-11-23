@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <div>
+    <button class="btn btn-info mb-2" type="button" [routerLink]="['/clientes/form']">Crear</button>
+  </div>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">name</th>
+      <th scope="col">apellido</th>
+      <th scope="col">email</th>
+      <th scope="col">fecha</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of arrayClient ">
+      <th scope="row">{{c.id}}</th>
+      <td>{{c.name}}</td>
+      <td>{{c.lastName}}</td>
+      <td>{{c.email}}</td>
+      <td>{{c.date}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
