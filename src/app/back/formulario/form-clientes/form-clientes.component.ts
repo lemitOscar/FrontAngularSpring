@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Clientes} from "../../clientes/model/clientes";
+import {Cliente} from "../../clientes/model/cliente";
 import {ClienteService} from "../../clientes/service/cliente.service";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import Swal from 'sweetalert2'
 
 @Component({
@@ -11,13 +11,15 @@ import Swal from 'sweetalert2'
 })
 export class FormClientesComponent implements OnInit {
 
-  public cliente: Clientes = new Clientes();
+  //cliente amarrado en el front
+  public cliente: Cliente = new Cliente();
 
   //inyecto el servicio
-  constructor(private clientService: ClienteService, private router: Router) {
+  constructor(private clientService: ClienteService, private router: Router, private activateRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.cargarClient();
   }
 
   public create(): void {
@@ -33,4 +35,32 @@ export class FormClientesComponent implements OnInit {
       }
     );
   }
+
+  cargarClient(): void {
+    this.activateRoute.params.subscribe(params => {
+      let id: number = params['id'];
+      if (id) {
+        this.clientService.getClientById(id).subscribe(cliente => {
+            this.cliente = cliente;
+          }
+        )
+      }
+    })
+  }//busca por ID
+
+
+  update(): void {
+    this.clientService.updateClient(this.cliente).subscribe(cliente => {
+      this.router.navigate(['/clientes']),
+        Swal.fire({
+          title: 'Guardado!',
+          text: `Cliente Actualizado ${this.cliente.name}`,
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        })
+    })
+  }
+
+
+
 }

@@ -10,6 +10,7 @@
       <th scope="col">apellido</th>
       <th scope="col">email</th>
       <th scope="col">fecha</th>
+      <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -19,6 +20,10 @@
       <td>{{c.lastName}}</td>
       <td>{{c.email}}</td>
       <td>{{c.date}}</td>
+      <td>
+        <button type="submit" class="btn btn-warning" [routerLink]="['/clientes/form/',c.id]">Edit</button>
+        <button type="submit" class="btn btn-danger ml-5" (click)="deleteClient(c)">delete</button>
+      </td>
     </tr>
     </tbody>
   </table>

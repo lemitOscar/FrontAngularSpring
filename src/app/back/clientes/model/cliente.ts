@@ -1,4 +1,4 @@
-export class Clientes {
+export class Cliente {
   id: number | undefined;
   name: string | undefined;
   lastName: string | undefined;
